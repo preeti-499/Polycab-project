@@ -1,0 +1,106 @@
+<style>
+  body {
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    text-align: center;
+    color: #3d1960;
+    margin-bottom: 30px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+  }
+
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 10px;
+    
+  }
+
+  label {
+    font-size: 16px;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .text-danger {
+    grid-column: span 2;
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+  }
+
+  .submit-btn {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .btn-primary {
+    background-color: #3d1960;
+    color: white;
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: fit-content;
+  }
+
+  .btn-primary:hover {
+    background-color: #3d1960;
+  }
+
+  .container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+  }
+</style>
+
+<body>
+
+  <div class="container">
+    <h2>Update User</h2>
+    <center>
+      <form method="post" class="form">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+          <div class="text-danger">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </center>
+  </div>
+</body>

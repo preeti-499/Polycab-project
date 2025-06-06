@@ -1,0 +1,114 @@
+<style>
+  body {
+    background: #edf0f5;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+  }
+
+  h2 {
+    text-align: center;
+    color: #3d1960;
+    margin-bottom: 40px;
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #cbd2d9;
+    border-radius: 12px;
+    background: #f9fafb;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  input:focus,
+  select:focus {
+    background: #ffffff;
+    border-color: #d32f2f;
+    outline: none;
+  }
+
+  .full-width {
+    grid-column: span 2;
+  }
+
+  button[type="submit"] {
+    grid-column: span 2;
+    margin-top: 20px;
+    background: #3d1960;
+    border: none;
+    padding: 15px;
+    color: white;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  button[type="submit"]:hover {
+    background: #3d1960;
+    transform: scale(1.02);
+
+  }
+
+  .container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn {
+    grid-column: span 2;
+    background: #3d1960;
+    border: none;
+    padding: 15px;
+    color: white;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none;
+  }
+  .but{
+    gap: 4rem;
+    
+  }
+</style>
+
+
+<body>
+  <div class="container">
+    <h2>Update Task</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br>
+      <div class="but">
+        <button type="submit">Update</button>
+        <a href="{% url 'task' %}" class="btn">Back</a>
+      </div>
+    </form>
+  </div>
+</body>

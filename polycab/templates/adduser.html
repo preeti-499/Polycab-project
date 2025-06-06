@@ -1,0 +1,89 @@
+<style>
+body {
+    background: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .card-container {
+    perspective: 1000px;
+  }
+  .card {
+      width: 500px;
+      height: 450px;
+      background: #f4f4f4;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    button {
+      width: 450px;
+      background: #6b4cb2;
+      color: #f4f4f4;
+      padding: 12px 8px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #d32f2f;
+    }
+</style>
+<div class="card-container card" style="max-width: 800px; margin: 0 auto; padding: 30px;">
+    <h2 style="text-align: center; color: #6b4cb2;">Add New User</h2>
+    <br>
+    <form method="POST" style="margin-top: 20px;">
+        {% csrf_token %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+            <div>
+                <label>Full Name</label>
+                <br>
+                {{ form.full_name }}
+            </div>
+
+            <div>
+                <label>Phone</label>
+                <br>
+                {{ form.phone }}
+            </div>
+
+            <div>
+                <label>Email</label>
+                <br>
+                {{ form.email }}
+            </div>
+
+            <div>
+                <label>Role</label>
+                <br>
+                {{ form.role }}
+            </div>
+
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" />
+            </div>
+
+            <div>
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control" />
+            </div>
+
+        </div>
+        <br>
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="submit" style="background-color: #6b4cb2; color: black; padding: 10px 30px; border: none; border-radius: 5px;">
+                Create User
+            </button>
+        </div>
+    </form>
+</div>

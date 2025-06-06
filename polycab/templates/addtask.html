@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+    background: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .card-container {
+    perspective: 1000px;
+
+  }
+  .card {
+      width: 1200px;
+      height: 820px;
+      background: #f4f4f4;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+      padding: 20px;
+      
+    }
+    button {
+      width: 450px;
+      background: #6b4cb2;
+      color: #f4f4f4;
+      padding: 12px 8px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #d32f2f;
+    }
+    .btn{
+        width: fit-content;
+        background-color: #7f64bd;
+        color: black;
+    }
+    .text-center{
+        color: #452b81;
+        font-weight: bold;
+    }
+    .form-details{
+        font-size: 18px;
+    }
+
+</style>
+<body>
+
+    <div class="card-container card mt-5">
+        <a href="{% url 'task' %}" class="btn mb-3">Back</a>
+        <h2 class="text-center mb-4">Add New Task</h2>
+
+        <form class="form-details" method="post" novalidate>
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    {{ form.state.label_tag }} {{ form.state }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.business_area.label_tag }} {{ form.business_area }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.district.label_tag }}
+                    <select id="district" name="district" class="form-control">
+                        <option value="">---------</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    {{ form.block.label_tag }} {{ form.block }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.milestone.label_tag }} {{ form.milestone }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.assigned_to.label_tag }} {{ form.assigned_to }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    {{ form.name.label_tag }} {{ form.name }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.status.label_tag }} {{ form.status }}
+                </div>
+            </div>
+            <div class="mb-1 ">
+                {{ form.subtasks.label_tag }} {{ form.subtasks }}
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    {{ form.start_date.label_tag }} {{ form.start_date }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.end_date.label_tag }} {{ form.end_date }}
+                </div>
+            </div>
+
+            <div class="gap-2">
+                <button type="submit" class="btn btn-danger btn-block">Create Task</button>
+            </div>
+        </form>
+        <!-- code for district according to states  -->
+        <script>
+            const stateDistricts = {
+                'Madhya Pradesh': ['Bhopal', 'Indore', 'Gwalior', 'Jabalpur', 'Ujjain'],
+                'Bihar': ['Patna', 'Gaya', 'Bhagalpur'],
+                'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara'],
+                'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Agra', 'Varanasi'],
+                'Haryana': ['Gurgaon', 'Faridabad', 'Panipat'],
+                'Delhi': ['Central Delhi', 'East Delhi', 'New Delhi'],
+                'Himachal Pradesh': ['Shimla', 'Manali', 'Dharamshala'],
+                'Andhra Pradesh': ['Vishakhapatnam', 'Vijayawada', 'Guntur'],
+                'Jharkhand': ['Ranchi', 'Dhanbad', 'Jamshedpur'],
+                'Chhattisgarh': ['Raipur', 'Bilaspur', 'Durg'],
+                'Goa': ['North Goa', 'South Goa'],
+                'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad'],
+            };
+        
+            document.getElementById('id_state').addEventListener('change', function() {
+                const state = this.value;
+                const districtSelect = document.getElementById('district');
+                districtSelect.innerHTML = '<option value="">---------</option>';
+        
+                if (stateDistricts[state]) {
+                    stateDistricts[state].forEach(function(district) {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.text = district;
+                        districtSelect.appendChild(option);
+                    });
+                }
+            });
+        </script> 
+            
+    </div>
+
+</body>
+
+</html>
